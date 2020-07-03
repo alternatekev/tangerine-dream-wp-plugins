@@ -1,0 +1,9 @@
+[submodule "wp-graphql"]
+	path = wp-graphql
+	url = git@github.com:wp-graphql/wp-graphql.git
+[submodule "wp-graphql-acf"]
+	path = wp-graphql-acf
+	url = git@github.com:wp-graphql/wp-graphql-acf.git
+[submodule "wp-graphiql"]
+	path = wp-graphiql
+	url = git@github.com:wp-graphql/wp-graphiql.git

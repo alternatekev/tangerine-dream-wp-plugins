@@ -13,9 +13,11 @@ License URI: https://oss.ninja/gpl-3.0?organization=Useful%20Team&project=WordPr
 Create JSON Web Token Authentication in WordPress.
 
 == Description ==
-WordPress JSON Web Token Authentication allows you to do REST API authentication via token. It is a simple, non-complex, and easy to use.
+WordPress JSON Web Token Authentication allows you to do REST API authentication via token. It is a simple, non-complex, and easy to use. This plugin probably is the most convenient way to do JWT Authentication in WordPress. 
 
-This plugin probably is the most convenient way to do JWT Authentication in WordPress.
+- Support & question: [WordPress support forum](https://wordpress.org/support/plugin/jwt-auth/)
+- Reporting plugin's bug: [GitHub issues tracker](https://github.com/usefulteam/jwt-auth/issues)
+- [Discord channel](https://discord.gg/SHj5GA) also available for faster response.
 
 ## Enable PHP HTTP Authorization Header
 
@@ -143,7 +145,7 @@ If the token is valid, the API call flow will continue as always.
 
 ## Whitelisting Endpoints
 
-Every call to the server (except the token creation some default whitelist) will be intercepted. However, you might need to whitelist some endpoints. You can use `jwt_auth_whitelist` filter to do it. E.g:
+Every call to the server (except the token creation some default whitelist) will be intercepted. However, you might need to whitelist some endpoints. You can use `jwt_auth_whitelist` filter to do it. Please simply add this filter directly (without hook). Or, you can add it to `plugins_loaded`. Adding this filter inside `init` (or later) will not work.
 
 `
 add_filter( 'jwt_auth_whitelist', function ( $endpoints ) {
@@ -517,14 +519,12 @@ Default value:
 
 `
 <?php
-$response = new WP_REST_Response(
-	array(
-		'success'    => true,
-		'statusCode' => 200,
-		'code'       => 'jwt_auth_valid_token',
-		'message'    => __( 'Token is valid', 'jwt-auth' ),
-		'data'       => array(),
-	)
+$response = array(
+	'success'    => true,
+	'statusCode' => 200,
+	'code'       => 'jwt_auth_valid_token',
+	'message'    => __( 'Token is valid', 'jwt-auth' ),
+	'data'       => array(),
 );
 `
 
@@ -640,6 +640,10 @@ You can help this plugin stay alive and maintained by giving **5 Stars** Rating/
 3. Other error responses
 
 == Changelog ==
+= 1.3.0 =
+- **Filter Change**: `jwt_auth_valid_token_response` should only filter the $response array instead of the whole `WP_REST_Response`. Please check if you use this filter :)
+- README update about `jwt_auth_whitelist` filter usage. That filter should be added directly (without hook) OR inside `plugins_loaded`. Adding it to `init` (or after that) will not work.
+
 = 1.2.0 =
 - **Critical Bugfix**: WooCommerce admin breaks. With this change, WooCommerce admin should be good.
 - New Filter: We whitelist some endpoints by default to support common plugin like WooCommerce. These default whitelisted endpoints are change-able via `jwt_auth_default_whitelist` filter.
