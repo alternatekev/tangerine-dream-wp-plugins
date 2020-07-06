@@ -7,3 +7,6 @@
 [submodule "wp-graphiql"]
 	path = wp-graphiql
 	url = git@github.com:wp-graphql/wp-graphiql.git
+[submodule "wp-graphql-jwt-authentication"]
+	path = wp-graphql-jwt-authentication
+	url = git@github.com:wp-graphql/wp-graphql-jwt-authentication.git

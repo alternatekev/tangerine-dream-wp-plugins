@@ -19,9 +19,9 @@ function flushCache() {
   wp_cache_flush();
 }
 
-add_action('save_post', flushCache);
+add_action('save_post', 'flushCache');
 
-add_filter('http_request_args', array($this, 'curlArgs'));
+add_filter('http_request_args', 'curlArgs');
 
 function curlArgs($r, $url) {
   $r['sslverify'] = false;
