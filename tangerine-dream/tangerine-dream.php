@@ -8,6 +8,8 @@
  * Author URI: https://www.alternate.org
  */
 
+ define( 'GRAPHQL_JWT_AUTH_SECRET_KEY', 'HbbYVZrAi718q8LT8EWOu2MW5payRc6hqRD0qyBrAm0SEvGP0gZrP8RxOagfDGBaDIcOirB0j+OxCB2oUi2mA==' );
+
  add_filter( 'jwt_auth_whitelist', function ( $endpoints ) {
     return array(
       '/wp-json/wp/v2/pages/*',
@@ -23,7 +25,7 @@ add_action('save_post', 'flushCache');
 
 add_filter('http_request_args', 'curlArgs');
 
-function curlArgs($r, $url) {
+function curlArgs($r) {
   $r['sslverify'] = false;
   return $r;
 }
